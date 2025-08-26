@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Pages } from "../objects/page";
+import { PAGE_MAP } from "../constants/constants";
 
 @Injectable({
     providedIn: 'root'
@@ -23,4 +24,15 @@ export class SettingService {
         this.setShow(index);
     }
 
+    getUrlWithPageParam(pageNumber: number): string {
+        let rtnString = `${location.pathname}`;
+        const pageName = PAGE_MAP[pageNumber];
+        if (pageName !== 'Home') {
+          const queryParams = new URLSearchParams()
+          queryParams.set('page', pageName);
+          rtnString = `${location.pathname}?${queryParams.toString()}`;
+        } 
+
+        return rtnString;
+    }
 }

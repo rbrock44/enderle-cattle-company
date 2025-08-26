@@ -1,21 +1,22 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
+import { PAGE_MAP } from '../../constants/constants';
 import { SettingService } from '../../services/settings.service';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'app-header',
   standalone: true,
   imports: [
     CommonModule,
-    
+
   ],
   providers: [
     SettingService
   ],
-  templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss'
 })
-export class FooterComponent {
+export class HeaderComponent {
 
   constructor(
     private location: Location,
@@ -23,14 +24,12 @@ export class FooterComponent {
   ) {
   }
 
-  currentYear = new Date().getFullYear();
-
   onNavClick(pageNumber: number): void {
-    const url: string = this.service.getUrlWithPageParam(pageNumber);
+    const url: string = this.service.getUrlWithPageParam(pageNumber)
     this.location.replaceState(url);
     
     this.service.setShow(pageNumber);
 
-    // console.log(`Footer navigation clicked: ${url}`);
+    // console.log(`Header navigation clicked: ${url}`);
   }
 }
