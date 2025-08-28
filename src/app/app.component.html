@@ -1,7 +1,12 @@
 <div class="min-h-screen flex flex-col">
   <app-header/>
   
-  <main class="flex-grow">
+  <main class="flex-grow bg-gray-600">
+    <!-- <app-home *ngIf="this.service.show[0]"/> -->
+    <app-our-story *ngIf="this.service.show[1]"/>
+    <app-awards *ngIf="this.service.show[2]"/>
+    <app-awards *ngIf="this.service.show[2]">Awards Inside</app-awards>
+    <!-- <app-contact-us *ngIf="this.service.show[3]"/> -->
   </main>
   
   <app-footer/>
