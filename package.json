@@ -1,5 +1,6 @@
 {
   "name": "enderle-cattle-company",
+  "homepage": "https://enderle-cattle-co.ryan-brock.com",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
