@@ -7,7 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:enderle-cattle-company": "node dist/enderle-cattle-company/server/server.mjs"
+    "serve:ssr:enderle-cattle-company": "node dist/enderle-cattle-company/server/server.mjs",
+    "gh-pages": "gh-pages -d dist",
+    "deploy": "npm run build --base=https://enderle-cattle-co.ryan-brock.com",
+    "prod": "npm run deploy && npm run gh-pages"
   },
   "private": true,
   "dependencies": {
