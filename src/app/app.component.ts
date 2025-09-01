@@ -6,15 +6,19 @@ import { AwardsComponent } from "./pages/awards/awards.component";
 import { OurStoryComponent } from "./pages/our-story/our-story.component";
 import { SettingService } from './services/settings.service';
 import { CommonModule } from '@angular/common';
+import { HomeComponent } from './pages/home/home.component';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 
 @Component({
   selector: 'app-root',
   imports: [
+    AwardsComponent,
     CommonModule,
-    RouterOutlet,
+    ContactUsComponent,
     FooterComponent,
     HeaderComponent,
-    AwardsComponent,
+    HomeComponent,
+    RouterOutlet,
     OurStoryComponent
   ],
   providers: [
