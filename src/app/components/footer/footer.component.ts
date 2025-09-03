@@ -1,6 +1,8 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { SettingService } from '../../services/settings.service';
+import { ADDRESS_1, ADDRESS_2, PHONE_NUMBER } from "../../constants/constants";
+
 
 @Component({
   selector: 'app-footer',
@@ -14,7 +16,6 @@ import { SettingService } from '../../services/settings.service';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-
   constructor(
     private location: Location,
     public service: SettingService
@@ -22,6 +23,9 @@ export class FooterComponent {
   }
 
   currentYear = new Date().getFullYear();
+  address1 = ADDRESS_1;
+  address2 = ADDRESS_2;
+  phoneNumber = PHONE_NUMBER;
 
   onNavClick(pageNumber: number): void {
     const url: string = this.service.getUrlWithPageParam(pageNumber);

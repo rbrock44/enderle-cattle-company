@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, ActivatedRoute } from '@angular/router';
 import { FooterComponent } from "./components/footer/footer.component";
 import { HeaderComponent } from "./components/header/header.component";
 import { AwardsComponent } from "./pages/awards/awards.component";
@@ -31,7 +31,8 @@ export class AppComponent {
   title = 'enderle-cattle-company';
 
   constructor(
-    public service: SettingService
+    public service: SettingService,
+    
   ) {
   }
 }

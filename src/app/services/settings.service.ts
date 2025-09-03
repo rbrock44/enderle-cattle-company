@@ -1,17 +1,30 @@
 import { Injectable } from "@angular/core";
 import { Pages } from "../objects/page";
-import { PAGE_MAP } from "../constants/constants";
+import { AWARD_FILE_URL, PAGE_MAP } from "../constants/constants";
+import { BehaviorSubject, interval } from "rxjs";
+import { Award } from "../objects/award";
+import { HttpClient } from "@angular/common/http";
+import * as XLSX from 'xlsx';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class SettingService {
+    private awardsSubject = new BehaviorSubject<Award[]>([]);
+    awards$ = this.awardsSubject.asObservable();
+
     // this show array controls which page is showed at a time
     // 1st: Home
     // 2nd: Our Story
     // 3rd: Awards and Rcognitions
     // 4th: Contact Us
     show = [true, false, false, false];
+
+    constructor(private http: HttpClient) {
+        // this.loadAwards();
+
+        // interval(15 * 60 * 1000).subscribe(() => this.loadAwards());
+    }
 
     setShow(index: number): void {
         this.show = [false, false, false, false];
@@ -29,11 +42,43 @@ export class SettingService {
         let rtnString = `${location.pathname}`;
         const pageName = PAGE_MAP[pageNumber];
         if (pageName !== 'Home') {
-          const queryParams = new URLSearchParams()
-          queryParams.set('page', pageName);
-          rtnString = `${location.pathname}?${queryParams.toString()}`;
-        } 
+            const queryParams = new URLSearchParams()
+            queryParams.set('page', pageName);
+            rtnString = `${location.pathname}?${queryParams.toString()}`;
+        }
 
         return rtnString;
+    }
+
+    private loadAwards() {
+        this.http.get(AWARD_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
+            next: (data) => {
+                const awards: Award[] = this.parseExcel(data);
+                this.awardsSubject.next(awards);
+            },
+            error: (err) => {
+                console.error('Failed to fetch awards file', err);
+            },
+        });
+    }
+
+    private parseExcel(fileContent: ArrayBuffer): Award[] {
+        const workbook = XLSX.read(fileContent, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+
+        const rows: any[] = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+
+        return rows.map((row, idx) => ({
+            year: Number(row['year'] ?? 0),
+            name: row['name'] ?? '',
+            eventName: row['eventName'] ?? '',
+            category: row['category'] ?? '',
+            shower: row['shower'] ?? '',
+            location: row['location'] ?? '',
+            pictures: row['pictures']
+                ? (row['pictures'] as string).split(';;').map((s) => s.trim())
+                : [],
+        }));
     }
 }
