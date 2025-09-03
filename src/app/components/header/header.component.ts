@@ -1,6 +1,5 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { PAGE_MAP } from '../../constants/constants';
 import { SettingService } from '../../services/settings.service';
 
 @Component({
@@ -11,7 +10,6 @@ import { SettingService } from '../../services/settings.service';
 
   ],
   providers: [
-    SettingService
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

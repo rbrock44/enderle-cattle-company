@@ -11,6 +11,7 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     AwardsComponent,
     CommonModule,
@@ -22,7 +23,6 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
     OurStoryComponent
   ],
   providers: [
-    SettingService
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

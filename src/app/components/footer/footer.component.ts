@@ -7,10 +7,8 @@ import { SettingService } from '../../services/settings.service';
   standalone: true,
   imports: [
     CommonModule,
-    
   ],
   providers: [
-    SettingService
   ],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'

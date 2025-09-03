@@ -16,6 +16,7 @@ export class SettingService {
     setShow(index: number): void {
         this.show = [false, false, false, false];
         this.show[index] = true;
+        console.log('SHOW: ', this.show)
     }
 
     setShowWithUrlParam(param: string): void {
