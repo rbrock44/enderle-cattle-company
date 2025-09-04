@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Pages } from "../objects/page";
-import { AWARD_FILE_URL, PAGE_MAP } from "../constants/constants";
+import { AWARD_FILE_URL, HOME, PAGE_MAP, PAGE_PARAM } from "../constants/constants";
 import { BehaviorSubject, interval } from "rxjs";
 import { Award } from "../objects/award";
 import { HttpClient } from "@angular/common/http";
@@ -29,7 +29,7 @@ export class SettingService {
     setShow(index: number): void {
         this.show = [false, false, false, false];
         this.show[index] = true;
-        console.log('SHOW: ', this.show)
+        // console.log('SHOW: ', this.show)
     }
 
     setShowWithUrlParam(param: string): void {
@@ -41,9 +41,9 @@ export class SettingService {
     getUrlWithPageParam(pageNumber: number): string {
         let rtnString = `${location.pathname}`;
         const pageName = PAGE_MAP[pageNumber];
-        if (pageName !== 'Home') {
+        if (pageName !== HOME) {
             const queryParams = new URLSearchParams()
-            queryParams.set('page', pageName);
+            queryParams.set(PAGE_PARAM, pageName);
             rtnString = `${location.pathname}?${queryParams.toString()}`;
         }
 

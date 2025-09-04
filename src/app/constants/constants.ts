@@ -7,6 +7,7 @@ export const PAGE_MAP: Record<number, string> = Object.fromEntries(
 );
 
 export const HOME: string = 'Home';
+export const PAGE_PARAM: string = 'page';
 
 export const ADDRESS_1: string = '5267 Co Rd 532';
 export const ADDRESS_2: string = 'Jackson, MO 63755';
@@ -15,3 +16,4 @@ export const EMAIL: string = 'someone@example.com';
 export const MAIL_TO: string = `mailto:${EMAIL}`
 
 export const AWARD_FILE_URL: string = 'https://drive.google.com/uc?export=download&id=YOUR_FILE_ID';
+export const UPCOMING_FILE_URL: string = 'https://drive.google.com/uc?export=download&id=YOUR_FILE_ID';

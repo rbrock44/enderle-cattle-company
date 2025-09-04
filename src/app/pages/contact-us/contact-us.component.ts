@@ -15,10 +15,6 @@ import { ADDRESS_1, ADDRESS_2, EMAIL, MAIL_TO, PHONE_NUMBER } from '../../consta
   styleUrl: './contact-us.component.scss'
 })
 export class ContactUsComponent {
-  constructor(
-  ) {
-  }
-
   address1 = ADDRESS_1;
   address2 = ADDRESS_2;
   phoneNumber = PHONE_NUMBER;
