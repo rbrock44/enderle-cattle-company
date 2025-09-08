@@ -8,8 +8,9 @@ import { ADDRESS_1, ADDRESS_2, EMAIL, MAIL_TO, PHONE_NUMBER } from '../../consta
   standalone: true,
   imports: [
     CommonModule,
-    ContentComponent
-  ],
+    ContentComponent,
+    // GetInTouchComponent
+],
   providers: [],
   templateUrl: './contact-us.component.html',
   styleUrl: './contact-us.component.scss'

@@ -11,7 +11,7 @@ interface Highlight {
 function createHighlight(name: string, description: string): Highlight {
   return {
     name,
-    image: name.toLowerCase(),
+    image: name.toLowerCase() + ".png",
     description
   }
 }

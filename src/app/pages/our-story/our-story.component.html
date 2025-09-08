@@ -5,9 +5,9 @@
         <app-content class="w-100">
             <h1 class="text-2xl font-bold mb-4">{{getTitle(highlight.name)}}</h1>
 
-            <div class="grid grid-cols-2 gap-4 items-center">
+            <div class="grid md:grid-cols-2 gap-4 items-center">
                 <div [ngClass]="i % 2 === 0 ? 'order-1' : 'order-2'">
-                    <img [src]="'public/highlight/' + highlight.image" alt="{{ highlight.name }}"
+                    <img [src]="'highlight/' + highlight.image" alt="{{ highlight.name }}"
                         class="w-full rounded-lg shadow" />
                 </div>
 

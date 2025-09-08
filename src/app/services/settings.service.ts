@@ -50,7 +50,12 @@ export class SettingService {
         return rtnString;
     }
 
-    private loadAwards() {
+    getInTouch(body: any) {
+        // TODO: replace url and handle better
+        return this.http.post('/api/contact', body);
+    }
+
+    private loadAwards(): void {
         this.http.get(AWARD_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
             next: (data) => {
                 const awards: Award[] = this.parseExcel(data);
