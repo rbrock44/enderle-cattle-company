@@ -1,10 +1,11 @@
-import { Injectable } from "@angular/core";
-import { Pages } from "../objects/page";
-import { AWARD_FILE_URL, HOME, PAGE_MAP, PAGE_PARAM } from "../constants/constants";
-import { BehaviorSubject, interval } from "rxjs";
-import { Award } from "../objects/award";
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import * as XLSX from 'xlsx';
+import { AWARD_FILE_URL, HOME, PAGE_MAP, PAGE_PARAM, UPCOMING_FILE_URL } from "../constants/constants";
+import { Award } from "../objects/award";
+import { Pages } from "../objects/page";
+import { UpcomingEvent } from "../objects/upcoming-event";
 
 @Injectable({
     providedIn: 'root',
@@ -12,6 +13,9 @@ import * as XLSX from 'xlsx';
 export class SettingService {
     private awardsSubject = new BehaviorSubject<Award[]>([]);
     awards$ = this.awardsSubject.asObservable();
+
+    private upcomingEventsSubject = new BehaviorSubject<UpcomingEvent[]>([]);
+    upcomingEvents$ = this.upcomingEventsSubject.asObservable();
 
     // this show array controls which page is showed at a time
     // 1st: Home
@@ -22,8 +26,12 @@ export class SettingService {
 
     constructor(private http: HttpClient) {
         // this.loadAwards();
+        // this.loadUpcomingEvents();
 
-        // interval(15 * 60 * 1000).subscribe(() => this.loadAwards());
+        // interval(15 * 60 * 1000).subscribe(() => {
+        //     this.loadAwards();
+        //     this.loadUpcomingEvents();
+        // });
     }
 
     setShow(index: number): void {
@@ -58,7 +66,7 @@ export class SettingService {
     private loadAwards(): void {
         this.http.get(AWARD_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
             next: (data) => {
-                const awards: Award[] = this.parseExcel(data);
+                const awards: Award[] = this.parseExcelIntoAwards(data);
                 this.awardsSubject.next(awards);
             },
             error: (err) => {
@@ -67,7 +75,7 @@ export class SettingService {
         });
     }
 
-    private parseExcel(fileContent: ArrayBuffer): Award[] {
+    private parseExcelIntoAwards(fileContent: ArrayBuffer): Award[] {
         const workbook = XLSX.read(fileContent, { type: 'array' });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
@@ -85,5 +93,34 @@ export class SettingService {
                 ? (row['pictures'] as string).split(';;').map((s) => s.trim())
                 : [],
         }));
+    }
+
+    private parseExcelIntoUpcomingEvents(fileContent: ArrayBuffer): UpcomingEvent[] {
+        const workbook = XLSX.read(fileContent, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+
+        const rows: any[] = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+
+        return rows.map((row, idx) => ({
+            year: Number(row['year'] ?? 0),
+            startDate: row['startDate'] ?? '',
+            endDate: row['endDate'] ?? '',
+            name: row['name'] ?? '',
+            location: row['location'] ?? '',
+            description: row['description'] ?? '',
+        }));
+    }
+
+    private loadUpcomingEvents(): void {
+        this.http.get(UPCOMING_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
+            next: (data) => {
+                const events: UpcomingEvent[] = this.parseExcelIntoUpcomingEvents(data);
+                this.upcomingEventsSubject.next(events);
+            },
+            error: (err) => {
+                console.error('Failed to fetch awards file', err);
+            },
+        });
     }
 }
