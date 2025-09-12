@@ -15,5 +15,5 @@ export const PHONE_NUMBER: string = '(573) 318-4551';
 export const EMAIL: string = 'someone@example.com';
 export const MAIL_TO: string = `mailto:${EMAIL}`
 
-export const AWARD_FILE_URL: string = 'https://drive.google.com/uc?export=download&id=YOUR_FILE_ID';
-export const UPCOMING_FILE_URL: string = 'https://drive.google.com/uc?export=download&id=YOUR_FILE_ID';
+export const AWARD_FILE_URL: string = 'https://docs.google.com/spreadsheets/d/1f8BRDGGY_xoVLeA1vXQFTkfhgdvcI6vM0JTQqk0njqM/export?format=xlsx';
+export const UPCOMING_FILE_URL: string = 'https://drive.google.com/uc?export=download&id=YOUR_FILE_ID/export?format=xlsx';

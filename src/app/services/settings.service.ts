@@ -22,10 +22,13 @@ export class SettingService {
     // 2nd: Our Story
     // 3rd: Awards and Rcognitions
     // 4th: Contact Us
-    show = [true, false, false, false];
+    private show = [true, false, false, false];
+
+    private showPageSubject = new BehaviorSubject<boolean[]>(this.show);
+    showPage$ = this.showPageSubject.asObservable();
 
     constructor(private http: HttpClient) {
-        // this.loadAwards();
+        this.loadAwards();
         // this.loadUpcomingEvents();
 
         // interval(15 * 60 * 1000).subscribe(() => {
@@ -35,8 +38,12 @@ export class SettingService {
     }
 
     setShow(index: number): void {
-        this.show = [false, false, false, false];
-        this.show[index] = true;
+        const newShow = [false, false, false, false];
+        newShow[index] = true;
+        this.show = newShow;
+
+        this.showPageSubject.next(newShow);
+
         // console.log('SHOW: ', this.show)
     }
 
@@ -63,11 +70,17 @@ export class SettingService {
         return this.http.post('/api/contact', body);
     }
 
+    startSubscriptions(): void {
+        this.loadAwards();
+        // this.loadUpcomingEvents();
+    }
+
     private loadAwards(): void {
         this.http.get(AWARD_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
             next: (data) => {
                 const awards: Award[] = this.parseExcelIntoAwards(data);
                 this.awardsSubject.next(awards);
+                console.log('AWARDS EMITTED IN SERVICE: ', awards, data)
             },
             error: (err) => {
                 console.error('Failed to fetch awards file', err);
@@ -86,6 +99,7 @@ export class SettingService {
             year: Number(row['year'] ?? 0),
             name: row['name'] ?? '',
             eventName: row['eventName'] ?? '',
+            animalName: row['animalName'] ?? '',
             category: row['category'] ?? '',
             shower: row['shower'] ?? '',
             location: row['location'] ?? '',

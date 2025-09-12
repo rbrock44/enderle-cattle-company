@@ -4,6 +4,7 @@ export interface Award {
     eventName: string;
     category: string;
     shower: string;
+    animalName: string
     location: string;
     pictures?: string[];
 }

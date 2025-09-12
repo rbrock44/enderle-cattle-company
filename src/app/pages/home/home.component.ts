@@ -22,13 +22,6 @@ export class HomeComponent {
 
   constructor(
     public service: SettingService,
-    private route: ActivatedRoute,
   ) {
-    this.route?.queryParamMap.subscribe((params) => {
-      const pageParam = params.get(PAGE_PARAM);
-      if (pageParam) {
-        this.service.setShowWithUrlParam(pageParam);
-      }
-    });
   }
 }

@@ -9,8 +9,6 @@ import { SettingService } from '../../services/settings.service';
     CommonModule,
 
   ],
-  providers: [
-  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

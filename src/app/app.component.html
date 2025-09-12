@@ -2,10 +2,10 @@
   <app-header/>
   
   <main class="flex-grow bg-gray-600">
-    <app-home *ngIf="this.service.show[0] === true"/>
-    <app-our-story *ngIf="this.service.show[1] === true"/>
-    <app-awards *ngIf="this.service.show[2] === true"/>
-    <app-contact-us *ngIf="this.service.show[3] === true"/>
+    <app-home *ngIf="showPage[0] === true"/>
+    <app-our-story *ngIf="showPage[1] === true"/>
+    <app-awards *ngIf="showPage[2] === true"/>
+    <app-contact-us *ngIf="showPage[3] === true"/>
   </main>
   
   <app-footer/>
