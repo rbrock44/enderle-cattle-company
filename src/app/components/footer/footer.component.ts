@@ -1,7 +1,7 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { SettingService } from '../../services/settings.service';
-import { ADDRESS_1, ADDRESS_2, PHONE_NUMBER } from "../../constants/constants";
+import { ADDRESS_1, ADDRESS_2, DEBUG, PHONE_NUMBER } from "../../constants/constants";
 
 
 @Component({
@@ -33,6 +33,7 @@ export class FooterComponent {
     
     this.service.setShow(pageNumber);
 
-    // console.log(`Footer navigation clicked: ${url}`);
+    if (DEBUG)
+      console.log(`Footer navigation clicked: ${url}`);
   }
 }

@@ -2,13 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import * as XLSX from 'xlsx';
-import { AWARD_FILE_URL, HOME, PAGE_MAP, PAGE_PARAM, UPCOMING_FILE_URL } from "../constants/constants";
+import { AWARD_FILE_URL, DEBUG, HOME, PAGE_MAP, PAGE_PARAM, UPCOMING_FILE_URL } from "../constants/constants";
 import { Award } from "../objects/award";
 import { Pages } from "../objects/page";
 import { UpcomingEvent } from "../objects/upcoming-event";
 import { isPlatformServer } from "@angular/common";
 
 const AWARDS_KEY = makeStateKey<Award[]>('awards');
+const UPCOMING_EVENTS_KEY = makeStateKey<UpcomingEvent[]>('upcoming_events');
 
 @Injectable({
     providedIn: 'root',
@@ -51,7 +52,8 @@ export class SettingService {
 
         this.showPageSubject.next(newShow);
 
-        // console.log('SHOW: ', this.show)
+        if (DEBUG)
+            console.log('SHOW: ', this.show)
     }
 
     setShowWithUrlParam(param: string): void {
@@ -97,7 +99,8 @@ export class SettingService {
 
                     this.transferState.set(AWARDS_KEY, awards);
                     this.awardsSubject.next(awards);
-                    console.log('AWARDS FETCHED ON SERVER: ', awards);
+                    if (DEBUG)
+                        console.log('AWARDS FETCHED ON SERVER: ', awards);
                 },
                 error: (err) => console.error('Failed to fetch awards file on server', err),
             });
@@ -143,14 +146,25 @@ export class SettingService {
     }
 
     private loadUpcomingEvents(): void {
-        this.http.get(UPCOMING_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
-            next: (data) => {
-                const events: UpcomingEvent[] = this.parseExcelIntoUpcomingEvents(data);
-                this.upcomingEventsSubject.next(events);
-            },
-            error: (err) => {
-                console.error('Failed to fetch awards file', err);
-            },
-        });
+        const cachedEvents = this.transferState.get(UPCOMING_EVENTS_KEY, null);
+
+        if (cachedEvents) {
+            this.upcomingEventsSubject.next(cachedEvents);
+            return;
+        }
+
+        if (isPlatformServer(this.platformId)) {
+            this.http.get(UPCOMING_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
+                next: (data) => {
+                    const events: UpcomingEvent[] = this.parseExcelIntoUpcomingEvents(data);
+
+                    this.transferState.set(UPCOMING_EVENTS_KEY, events);
+                    this.upcomingEventsSubject.next(events);
+                },
+                error: (err) => {
+                    console.error('Failed to fetch awards file', err);
+                },
+            });
+        }
     }
 }

@@ -9,6 +9,9 @@ export const PAGE_MAP: Record<number, string> = Object.fromEntries(
 export const HOME: string = 'Home';
 export const PAGE_PARAM: string = 'page';
 
+// this will emit console logs to help debug
+export const DEBUG: boolean = false;
+
 export const ADDRESS_1: string = '5267 Co Rd 532';
 export const ADDRESS_2: string = 'Jackson, MO 63755';
 export const PHONE_NUMBER: string = '(573) 318-4551';

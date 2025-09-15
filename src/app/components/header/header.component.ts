@@ -1,6 +1,7 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { SettingService } from '../../services/settings.service';
+import { DEBUG } from '../../constants/constants';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,7 @@ export class HeaderComponent {
     
     this.service.setShow(pageNumber);
 
-    // console.log(`Header navigation clicked: ${url}`);
+    if (DEBUG)
+      console.log(`Header navigation clicked: ${url}`);
   }
 }

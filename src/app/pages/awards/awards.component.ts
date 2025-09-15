@@ -4,6 +4,7 @@ import { ContentComponent } from "../../components/content/content.component";
 import { Award } from '../../objects/award';
 import { SettingService } from '../../services/settings.service';
 import { AwardComponent } from "../../components/award/award.component";
+import { DEBUG } from '../../constants/constants';
 
 @Component({
   selector: 'app-awards',
@@ -27,7 +28,8 @@ export class AwardsComponent {
     this.showContent = false;
 
     this.service.awards$.subscribe((data) => {
-      console.log('COMPONENT AWARDS: ', data)
+      if (DEBUG)
+        console.log('COMPONENT AWARDS: ', data)
       this.awards = data;
       this.showContent = true;
     });
