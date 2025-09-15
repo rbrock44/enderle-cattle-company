@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center items-center text-lg space-y-2">
     <h1 class="text-2xl font-bold text-white mt-4">Awards</h1>
-    <app-content class="w-100" *ngIf="this.showContent && this.awards.length > 0">
-        <div *ngFor="let award of awards" class="mb-6 p-4 border-b border-gray-300">
+    <app-content *ngIf="this.showContent && this.awards.length > 0">
+        <div *ngFor="let award of awards" class="md:mb-6 md:p-4 border-b border-gray-300">
             <app-award [award]="award"></app-award>
         </div>
     </app-content>

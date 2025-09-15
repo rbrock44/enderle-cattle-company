@@ -3,7 +3,7 @@
         {{ event.year }} - {{ event.name }}
     </div>
     <div class="text-gray-700">
-       {{ event.location }} | {{ this.trimYear(event.startDate) }} - {{ this.trimYear(event.endDate) }}
+       {{ this.trimYear(event.startDate) }} - {{ this.trimYear(event.endDate) }} | {{ event.location }}
     </div>
     <div class="text-gray-500" *ngIf="event.description">
         {{ event.description }}  

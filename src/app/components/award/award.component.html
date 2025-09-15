@@ -5,12 +5,12 @@
     <div class="text-gray-700">
         {{ award.eventName }} • {{ award.category }}
     </div>
-    <div class="text-gray-500">
+    <div class="text-gray-500 md:whitespace-nowrap">
         {{ award.shower }} | {{ award.animalName }} | {{ award.location }}
     </div>
 
     <div *ngIf="award.pictures?.length" class="mt-3 flex flex-wrap gap-2">
-        <img *ngFor="let pic of award.pictures" [src]="pic" alt="Award picture"
+        <img *ngFor="let pic of award.pictures; let i = index" [src]="pic" [alt]="award.name + ' - ' + i"
             class="w-32 h-32 object-cover rounded shadow">
     </div>
 </div>
