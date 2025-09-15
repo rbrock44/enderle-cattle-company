@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-6 py-4">
         <div class="grid grid-cols-3 items-center">
             <div class="flex items-center space-x-4 x-4">
-                <a href="https://facebook.com/enderle-cattle-co" target="_blank" rel="noopener noreferrer"
+                <a [href]="urlFacebook" target="_blank" rel="noopener noreferrer"
                     class="text-gray-300 hover:text-white transition-colors duration-200">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                         <path
@@ -10,7 +10,7 @@
                     </svg>
                 </a>
 
-                <a href="https://twitter.com/enderle-cattle-co" target="_blank" rel="noopener noreferrer"
+                <a [href]="urlTwitter" target="_blank" rel="noopener noreferrer"
                     class="text-gray-300 hover:text-white transition-colors duration-200">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                         <path
@@ -18,7 +18,7 @@
                     </svg>
                 </a>
 
-                <a href="https://linkedin.com/company/enderle-cattle-co" target="_blank" rel="noopener noreferrer"
+                <a [href]="urlLinkedIn" target="_blank" rel="noopener noreferrer"
                     class="text-gray-300 hover:text-white transition-colors duration-200">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                         <path
@@ -29,13 +29,15 @@
 
             <div class="flex justify-center">
                 <div class="flex items-center">
+                    <!-- TODO: swap to company logo when given -->
                     <!-- <img src="/assets/logo-white.png" alt="Company Logo" class="h-12 w-auto"> -->
-                    
+
                     <span class="text-2xl text-white font-bold text-gray-800">Enderle Cattle Co.</span>
                 </div>
             </div>
 
             <div class="flex justify-end">
+                <!-- TODO: make this button navigate to the GetInTouchForm in ContactUsComponent -->
                 <button
                     class="bg-amber-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg hover:cursor-pointer">
                     Get In Touch
@@ -47,22 +49,12 @@
     <nav class="bg-gray-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex items-center justify-center space-x-8 py-2">
-                <button (click)="this.onNavClick(0)"
+                <div *ngFor="let name of pageNames; let i = index">
+                    <button (click)="this.onNavClick(i)"
                         class="text-gray-300 hover:text-white text-left text-sm transition-colors duration-200 hover:underline hover:cursor-pointer">
-                        Home
+                        {{name}}
                     </button>
-                    <button (click)="this.onNavClick(1)"
-                        class="text-gray-300 hover:text-white text-left text-sm transition-colors duration-200 hover:underline hover:cursor-pointer">
-                        Our Story
-                    </button>
-                    <button (click)="this.onNavClick(2)"
-                        class="text-gray-300 hover:text-white text-left text-sm transition-colors duration-200 hover:underline hover:cursor-pointer">
-                        Awards
-                    </button>
-                    <button (click)="this.onNavClick(3)"
-                        class="text-gray-300 hover:text-white text-left text-sm transition-colors duration-200 hover:underline hover:cursor-pointer">
-                        Contact Us
-                    </button>
+                </div>
             </div>
         </div>
     </nav>

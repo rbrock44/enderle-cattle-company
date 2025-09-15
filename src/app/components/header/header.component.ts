@@ -1,7 +1,7 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { SettingService } from '../../services/settings.service';
-import { DEBUG } from '../../constants/constants';
+import { DEBUG, PAGE_NAMES, URL_FACEOOK, URL_LINKED_IN, URL_TWITTER } from '../../constants/constants';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +14,10 @@ import { DEBUG } from '../../constants/constants';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  pageNames: string[] = PAGE_NAMES;
+  urlTwitter: string = URL_TWITTER;
+  urlFacebook: string = URL_FACEOOK;
+  urlLinkedIn: string = URL_LINKED_IN;
 
   constructor(
     private location: Location,

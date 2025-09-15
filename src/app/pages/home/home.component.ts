@@ -27,6 +27,7 @@ export class HomeComponent {
     this.service.upcomingEvents$.subscribe((data) => {
       if (DEBUG)
         console.log('COMPONENT UPCOMING EVENTS: ', data)
+      
       // TODO: once more data, only show upcoming events
       // this.upcomingEvents = onlyUpcomingEvents(data);
       this.upcomingEvents = data;
