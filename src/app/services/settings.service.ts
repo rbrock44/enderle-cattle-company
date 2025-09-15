@@ -1,12 +1,12 @@
+import { isPlatformServer } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from "@angular/core";
-import { BehaviorSubject, interval } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import * as XLSX from 'xlsx';
-import { AWARD_FILE_URL, DEBUG, GET_IN_TOUCH_API_URL, HOME, PAGE_MAP, PAGE_PARAM, REFRESH_RATE_IN_MIN, UPCOMING_FILE_URL } from "../constants/constants";
+import { AWARD_FILE_URL, DEBUG, GET_IN_TOUCH_API_URL, HOME, PAGE_MAP, PAGE_PARAM, UPCOMING_FILE_URL } from "../constants/constants";
 import { Award } from "../objects/award";
 import { Pages } from "../objects/page";
 import { UpcomingEvent } from "../objects/upcoming-event";
-import { isPlatformServer } from "@angular/common";
 
 const AWARDS_KEY = makeStateKey<Award[]>('awards');
 const UPCOMING_EVENTS_KEY = makeStateKey<UpcomingEvent[]>('upcoming_events');
@@ -38,9 +38,9 @@ export class SettingService {
     ) {
         this.startSubscriptions();
 
-        interval(REFRESH_RATE_IN_MIN * 60 * 1000).subscribe(() => {
-            this.startSubscriptions();
-        });
+        // interval(REFRESH_RATE_IN_MIN * 60 * 1000).subscribe(() => {
+        //     this.startSubscriptions();
+        // });
     }
 
     setShow(index: number): void {
@@ -78,20 +78,20 @@ export class SettingService {
     }
 
     startSubscriptions(): void {
-        this.loadAwards();
-        this.loadUpcomingEvents();
+        const isPlatformServerLocal: boolean = isPlatformServer(this.platformId);
+        this.loadAwards(isPlatformServerLocal);
+        this.loadUpcomingEvents(isPlatformServerLocal);
     }
 
-    private loadAwards(): void {
-        const isPlatformServerLocal: boolean = isPlatformServer(this.platformId);
+    private loadAwards(isPlatformServer: boolean): void {
         const cachedAwards = this.transferState.get(AWARDS_KEY, null);
 
-        if (cachedAwards && !isPlatformServerLocal) {
+        if (cachedAwards && !isPlatformServer) {
             this.awardsSubject.next(cachedAwards);
             return;
         }
 
-        if (isPlatformServerLocal) {
+        if (isPlatformServer) {
             this.http.get(AWARD_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
                 next: (data) => {
                     const awards: Award[] = this.parseExcelIntoAwards(data);
@@ -144,16 +144,15 @@ export class SettingService {
         }));
     }
 
-    private loadUpcomingEvents(): void {
-        const isPlatformServerLocal: boolean = isPlatformServer(this.platformId);
+    private loadUpcomingEvents(isPlatformServer: boolean): void {;
         const cachedEvents = this.transferState.get(UPCOMING_EVENTS_KEY, null);
 
-        if (cachedEvents && !isPlatformServerLocal) {
+        if (cachedEvents && !isPlatformServer) {
             this.upcomingEventsSubject.next(cachedEvents);
             return;
         }
 
-        if (isPlatformServerLocal) {
+        if (isPlatformServer) {
             this.http.get(UPCOMING_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
                 next: (data) => {
                     const events: UpcomingEvent[] = this.parseExcelIntoUpcomingEvents(data);
@@ -169,10 +168,10 @@ export class SettingService {
     }
 
     private excelSerialToMDYY(serial: number): string {
-        const excelEpoch = new Date(1899, 11, 30); 
+        const excelEpoch = new Date(1899, 11, 30);
         const date = new Date(excelEpoch.getTime() + serial * 86400000);
 
-        const month = date.getMonth() + 1; 
+        const month = date.getMonth() + 1;
         const day = date.getDate();
         const year = date.getFullYear() % 100;
 
