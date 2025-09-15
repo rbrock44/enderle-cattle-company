@@ -1,10 +1,20 @@
 import { Pages } from "../objects/page";
+import { UpcomingEvent } from "../objects/upcoming-event";
 
 export const PAGE_MAP: Record<number, string> = Object.fromEntries(
     Object.entries(Pages)
         .filter(([key, value]) => typeof value === 'number')
         .map(([key, value]) => [value, key])
 );
+
+export function onlyUpcomingEvents(events: UpcomingEvent[]): UpcomingEvent[] {
+    const now = new Date();
+
+    return events.filter(event => {
+        const end = new Date(event.endDate);
+        return end >= now;
+    });
+}
 
 export const HOME: string = 'Home';
 export const PAGE_PARAM: string = 'page';

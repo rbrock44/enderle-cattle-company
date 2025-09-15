@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { SettingService } from '../../services/settings.service';
-import { ActivatedRoute } from '@angular/router';
-import { DEBUG, PAGE_PARAM } from '../../constants/constants';
 import { ContentComponent } from '../../components/content/content.component';
-import { UpcomingEvent } from '../../objects/upcoming-event';
 import { EventComponent } from '../../components/event/event.component';
+import { DEBUG } from '../../constants/constants';
+import { UpcomingEvent } from '../../objects/upcoming-event';
+import { SettingService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +27,8 @@ export class HomeComponent {
     this.service.upcomingEvents$.subscribe((data) => {
       if (DEBUG)
         console.log('COMPONENT UPCOMING EVENTS: ', data)
+      // TODO: once more data, only show upcoming events
+      // this.upcomingEvents = onlyUpcomingEvents(data);
       this.upcomingEvents = data;
     });
   }

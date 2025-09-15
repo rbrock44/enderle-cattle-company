@@ -20,4 +20,11 @@ export class EventComponent {
     location: '',
     description: '',
   }
+
+  trimYear(date: string): string {
+    if (date === '' || date.length < 3)
+        return date;
+    
+    return date.substring(0, date.length - 3);
+  }
 }

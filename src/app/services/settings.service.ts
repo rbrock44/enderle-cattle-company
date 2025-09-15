@@ -135,8 +135,8 @@ export class SettingService {
 
         return rows.map((row, idx) => ({
             year: Number(row['year'] ?? 0),
-            startDate: row['startDate'] ?? '',
-            endDate: row['endDate'] ?? '',
+            startDate: row['startDate'] ? this.excelSerialToMDYY(row['startDate']) : '',
+            endDate: row['endDate'] ? this.excelSerialToMDYY(row['endDate']) : '',
             name: row['name'] ?? '',
             location: row['location'] ?? '',
             description: row['description'] ?? '',
@@ -164,5 +164,16 @@ export class SettingService {
                 },
             });
         }
+    }
+
+    private excelSerialToMDYY(serial: number): string {
+        const excelEpoch = new Date(1899, 11, 30); 
+        const date = new Date(excelEpoch.getTime() + serial * 86400000);
+
+        const month = date.getMonth() + 1; 
+        const day = date.getDate();
+        const year = date.getFullYear() % 100;
+
+        return `${month}/${day}/${year}`;
     }
 }
