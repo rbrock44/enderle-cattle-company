@@ -1,9 +1,9 @@
 import { isPlatformServer } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from "@angular/core";
-import { BehaviorSubject, timer } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 import * as XLSX from 'xlsx';
-import { AWARD_FILE_URL, DEBUG, GET_IN_TOUCH_API_URL, HOME, PAGE_MAP, PAGE_PARAM, REFRESH_RATE_IN_MIN, UPCOMING_FILE_URL } from "../constants/constants";
+import { AWARD_FILE_URL, DEBUG, GET_IN_TOUCH_API_URL, HOME, PAGE_MAP, PAGE_PARAM, UPCOMING_FILE_URL } from "../constants/constants";
 import { Award } from "../objects/award";
 import { Pages } from "../objects/page";
 import { UpcomingEvent } from "../objects/upcoming-event";
@@ -38,9 +38,9 @@ export class SettingService {
     ) {
         this.startSubscriptions();
 
-        timer(REFRESH_RATE_IN_MIN * 60 * 1000).subscribe(() => {
-            this.startSubscriptions();
-        });
+        // timer(REFRESH_RATE_IN_MIN * 60 * 1000).subscribe(() => {
+        //     this.startSubscriptions();
+        // });
     }
 
     setShow(index: number): void {
