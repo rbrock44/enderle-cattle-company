@@ -36,6 +36,8 @@ export const OUR_STORY_HIGHLIGHTS: Highlight[] = [
 
 export const HOME: string = 'Home';
 export const PAGE_PARAM: string = 'page';
+export const GET_IN_TOUCH_PARAM: string = 'getInTouch';
+export const GET_IN_TOUCH_URL: string = `&${GET_IN_TOUCH_PARAM}=true`;
 
 export const PAGE_NAMES: string[] = ['Home', 'Our Story', 'Awards', 'Contact Us']
 
@@ -51,7 +53,7 @@ export const MAIL_TO: string = `mailto:${EMAIL}`
 export const AWARD_FILE_URL: string = 'https://docs.google.com/spreadsheets/d/1f8BRDGGY_xoVLeA1vXQFTkfhgdvcI6vM0JTQqk0njqM/export?format=xlsx';
 export const UPCOMING_FILE_URL: string = 'https://docs.google.com/spreadsheets/d/1mLF0DeiDj52b4lEtZBydNJ0-qa8_y6MzgqEPMxuzBYM/export?format=xlsx';
 
-export const GET_IN_TOUCH_URL: string = '/api/contact';
+export const GET_IN_TOUCH_API_URL: string = '/api/contact';
 
 export const URL_TWITTER: string = 'https://twitter.com/enderle-cattle-co';
 export const URL_FACEOOK: string = 'https://facebook.com/enderle-cattle-co';

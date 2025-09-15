@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import * as XLSX from 'xlsx';
-import { AWARD_FILE_URL, DEBUG, GET_IN_TOUCH_URL, HOME, PAGE_MAP, PAGE_PARAM, UPCOMING_FILE_URL } from "../constants/constants";
+import { AWARD_FILE_URL, DEBUG, GET_IN_TOUCH_API_URL, HOME, PAGE_MAP, PAGE_PARAM, UPCOMING_FILE_URL } from "../constants/constants";
 import { Award } from "../objects/award";
 import { Pages } from "../objects/page";
 import { UpcomingEvent } from "../objects/upcoming-event";
@@ -74,7 +74,7 @@ export class SettingService {
 
     getInTouch(body: any) {
         // TODO: replace url and handle better
-        return this.http.post(GET_IN_TOUCH_URL, body);
+        return this.http.post(GET_IN_TOUCH_API_URL, body);
     }
 
     startSubscriptions(): void {
