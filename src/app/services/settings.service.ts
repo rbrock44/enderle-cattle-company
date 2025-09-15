@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, interval } from "rxjs";
 import * as XLSX from 'xlsx';
 import { AWARD_FILE_URL, DEBUG, GET_IN_TOUCH_API_URL, HOME, PAGE_MAP, PAGE_PARAM, UPCOMING_FILE_URL } from "../constants/constants";
 import { Award } from "../objects/award";
@@ -26,7 +26,7 @@ export class SettingService {
     // 2nd: Our Story
     // 3rd: Awards and Rcognitions
     // 4th: Contact Us
-    private show = [true, false, false, false];
+    private show: boolean[] = [true, false, false, false];
 
     private showPageSubject = new BehaviorSubject<boolean[]>(this.show);
     showPage$ = this.showPageSubject.asObservable();
@@ -38,9 +38,9 @@ export class SettingService {
     ) {
         this.startSubscriptions();
 
-        // interval(15 * 60 * 1000).subscribe(() => {
-        //     this.startSubscriptions();
-        // });
+        interval(15 * 60 * 1000).subscribe(() => {
+            this.startSubscriptions();
+        });
     }
 
     setShow(index: number): void {
@@ -85,7 +85,7 @@ export class SettingService {
     private loadAwards(): void {
         const cachedAwards = this.transferState.get(AWARDS_KEY, null);
 
-        if (cachedAwards) {
+        if (cachedAwards && !isPlatformServer(this.platformId) {
             this.awardsSubject.next(cachedAwards);
             return;
         }
@@ -146,7 +146,7 @@ export class SettingService {
     private loadUpcomingEvents(): void {
         const cachedEvents = this.transferState.get(UPCOMING_EVENTS_KEY, null);
 
-        if (cachedEvents) {
+        if (cachedEvents && isPlatformServer(this.platformId) {
             this.upcomingEventsSubject.next(cachedEvents);
             return;
         }
