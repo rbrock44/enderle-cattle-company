@@ -121,6 +121,7 @@ export class SettingService {
             category: row['category'] ?? '',
             shower: row['shower'] ?? '',
             location: row['location'] ?? '',
+            date: row['date'] ? this.excelSerialToMDYY(row['date']) : '',
             pictures: row['pictures']
                 ? (row['pictures'] as string).split(';;').map((s) => s.trim())
                 : [],

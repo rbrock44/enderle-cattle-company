@@ -6,5 +6,6 @@ export interface Award {
     shower: string;
     animalName: string
     location: string;
+    date: string;
     pictures?: string[];
 }
