@@ -2,6 +2,9 @@ import { Highlight } from "../objects/highlight";
 import { Pages } from "../objects/page";
 import { UpcomingEvent } from "../objects/upcoming-event";
 
+// this will emit console logs to help debug
+export const DEBUG: boolean = false;
+
 export const PAGE_MAP: Record<number, string> = Object.fromEntries(
     Object.entries(Pages)
         .filter(([key, value]) => typeof value === 'number')
@@ -41,8 +44,7 @@ export const GET_IN_TOUCH_URL: string = `&${GET_IN_TOUCH_PARAM}=true`;
 
 export const PAGE_NAMES: string[] = ['Home', 'Our Story', 'Awards', 'Contact Us']
 
-// this will emit console logs to help debug
-export const DEBUG: boolean = false;
+export const REFRESH_RATE_IN_MIN: number = 15;
 
 export const ADDRESS_1: string = '5267 Co Rd 532';
 export const ADDRESS_2: string = 'Jackson, MO 63755';
@@ -50,9 +52,9 @@ export const PHONE_NUMBER: string = '(573) 318-4551';
 export const EMAIL: string = 'someone@example.com';
 export const MAIL_TO: string = `mailto:${EMAIL}`
 
+// URL SECTION
 export const AWARD_FILE_URL: string = 'https://docs.google.com/spreadsheets/d/1f8BRDGGY_xoVLeA1vXQFTkfhgdvcI6vM0JTQqk0njqM/export?format=xlsx';
 export const UPCOMING_FILE_URL: string = 'https://docs.google.com/spreadsheets/d/1mLF0DeiDj52b4lEtZBydNJ0-qa8_y6MzgqEPMxuzBYM/export?format=xlsx';
-
 export const GET_IN_TOUCH_API_URL: string = '/api/contact';
 
 export const URL_TWITTER: string = 'https://twitter.com/enderle-cattle-co';
