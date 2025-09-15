@@ -20,5 +20,6 @@ export class AwardComponent {
     shower: '',
     animalName: '', 
     location: '',
+    date: '',
   }
 }
