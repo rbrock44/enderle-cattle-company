@@ -36,12 +36,10 @@ export class SettingService {
         private transferState: TransferState,
         @Inject(PLATFORM_ID) private platformId: Object
     ) {
-        this.loadAwards();
-        // this.loadUpcomingEvents();
+        this.startSubscriptions();
 
         // interval(15 * 60 * 1000).subscribe(() => {
-        //     this.loadAwards();
-        //     this.loadUpcomingEvents();
+        //     this.startSubscriptions();
         // });
     }
 
