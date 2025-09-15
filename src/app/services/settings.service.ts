@@ -85,7 +85,7 @@ export class SettingService {
     private loadAwards(): void {
         const cachedAwards = this.transferState.get(AWARDS_KEY, null);
 
-        if (cachedAwards && !isPlatformServer(this.platformId) {
+        if (cachedAwards && !isPlatformServer(this.platformId)) {
             this.awardsSubject.next(cachedAwards);
             return;
         }
@@ -146,7 +146,7 @@ export class SettingService {
     private loadUpcomingEvents(): void {
         const cachedEvents = this.transferState.get(UPCOMING_EVENTS_KEY, null);
 
-        if (cachedEvents && !isPlatformServer(this.platformId) {
+        if (cachedEvents && !isPlatformServer(this.platformId)) {
             this.upcomingEventsSubject.next(cachedEvents);
             return;
         }
