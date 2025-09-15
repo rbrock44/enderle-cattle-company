@@ -146,7 +146,7 @@ export class SettingService {
     private loadUpcomingEvents(): void {
         const cachedEvents = this.transferState.get(UPCOMING_EVENTS_KEY, null);
 
-        if (cachedEvents && isPlatformServer(this.platformId) {
+        if (cachedEvents && !isPlatformServer(this.platformId) {
             this.upcomingEventsSubject.next(cachedEvents);
             return;
         }
