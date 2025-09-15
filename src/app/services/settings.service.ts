@@ -79,7 +79,7 @@ export class SettingService {
 
     startSubscriptions(): void {
         this.loadAwards();
-        // this.loadUpcomingEvents();
+        this.loadUpcomingEvents();
     }
 
     private loadAwards(): void {

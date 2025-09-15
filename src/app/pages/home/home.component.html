@@ -3,7 +3,9 @@
 
    <app-content class="w-100" *ngIf="this.upcomingEvents.length > 0">
         <h1 class="text-2xl font-bold mb-6 pt-2">Upcoming Events</h1>
-
-        
+        <div *ngFor="let event of upcomingEvents" class="mb-6 p-4 border-b border-gray-300">
+            <app-event [event]="event"></app-event>
+        </div>
+    
     </app-content>
 </div>
