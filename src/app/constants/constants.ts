@@ -15,7 +15,7 @@ export function onlyUpcomingEvents(events: UpcomingEvent[]): UpcomingEvent[] {
         const end = new Date(event.endDate);
         return end >= now;
     });
-}
+};
 
 function createHighlight(name: string, description: string): Highlight {
     return {
@@ -23,7 +23,7 @@ function createHighlight(name: string, description: string): Highlight {
         image: 'highlight/' + name.toLowerCase() + ".png",
         description
     }
-}
+};
 
 export const OUR_STORY_HIGHLIGHTS: Highlight[] = [
     createHighlight('Company', 'This is a company overview'),
@@ -32,7 +32,7 @@ export const OUR_STORY_HIGHLIGHTS: Highlight[] = [
     createHighlight('Maebry', ''),
     createHighlight('McCaffrey', ''),
     createHighlight('Colter', ''),
-]
+];
 
 export const HOME: string = 'Home';
 export const PAGE_PARAM: string = 'page';
