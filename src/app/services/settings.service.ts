@@ -1,11 +1,14 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import * as XLSX from 'xlsx';
 import { AWARD_FILE_URL, HOME, PAGE_MAP, PAGE_PARAM, UPCOMING_FILE_URL } from "../constants/constants";
 import { Award } from "../objects/award";
 import { Pages } from "../objects/page";
 import { UpcomingEvent } from "../objects/upcoming-event";
+import { isPlatformServer } from "@angular/common";
+
+const AWARDS_KEY = makeStateKey<Award[]>('awards');
 
 @Injectable({
     providedIn: 'root',
@@ -27,7 +30,11 @@ export class SettingService {
     private showPageSubject = new BehaviorSubject<boolean[]>(this.show);
     showPage$ = this.showPageSubject.asObservable();
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private transferState: TransferState,
+        @Inject(PLATFORM_ID) private platformId: Object
+    ) {
         this.loadAwards();
         // this.loadUpcomingEvents();
 
@@ -76,16 +83,25 @@ export class SettingService {
     }
 
     private loadAwards(): void {
-        this.http.get(AWARD_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
-            next: (data) => {
-                const awards: Award[] = this.parseExcelIntoAwards(data);
-                this.awardsSubject.next(awards);
-                console.log('AWARDS EMITTED IN SERVICE: ', awards, data)
-            },
-            error: (err) => {
-                console.error('Failed to fetch awards file', err);
-            },
-        });
+        const cachedAwards = this.transferState.get(AWARDS_KEY, null);
+
+        if (cachedAwards) {
+            this.awardsSubject.next(cachedAwards);
+            return;
+        }
+
+        if (isPlatformServer(this.platformId)) {
+            this.http.get(AWARD_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
+                next: (data) => {
+                    const awards: Award[] = this.parseExcelIntoAwards(data);
+
+                    this.transferState.set(AWARDS_KEY, awards);
+                    this.awardsSubject.next(awards);
+                    console.log('AWARDS FETCHED ON SERVER: ', awards);
+                },
+                error: (err) => console.error('Failed to fetch awards file on server', err),
+            });
+        }
     }
 
     private parseExcelIntoAwards(fileContent: ArrayBuffer): Award[] {

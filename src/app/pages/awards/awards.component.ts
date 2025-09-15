@@ -3,15 +3,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContentComponent } from "../../components/content/content.component";
 import { Award } from '../../objects/award';
 import { SettingService } from '../../services/settings.service';
+import { AwardComponent } from "../../components/award/award.component";
 
 @Component({
   selector: 'app-awards',
   standalone: true,
   imports: [
     CommonModule,
-    ContentComponent
-  ],
-  providers: [],
+    ContentComponent,
+    AwardComponent
+],
   templateUrl: './awards.component.html',
   styleUrl: './awards.component.scss',
   changeDetection: ChangeDetectionStrategy.Default
