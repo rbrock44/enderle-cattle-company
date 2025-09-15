@@ -83,14 +83,15 @@ export class SettingService {
     }
 
     private loadAwards(): void {
+        const isPlatformServerLocal: boolean = isPlatformServer(this.platformId);
         const cachedAwards = this.transferState.get(AWARDS_KEY, null);
 
-        if (cachedAwards && !isPlatformServer(this.platformId)) {
+        if (cachedAwards && !isPlatformServerLocal) {
             this.awardsSubject.next(cachedAwards);
             return;
         }
 
-        if (isPlatformServer(this.platformId)) {
+        if (isPlatformServerLocal) {
             this.http.get(AWARD_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
                 next: (data) => {
                     const awards: Award[] = this.parseExcelIntoAwards(data);
@@ -144,14 +145,15 @@ export class SettingService {
     }
 
     private loadUpcomingEvents(): void {
+        const isPlatformServerLocal: boolean = isPlatformServer(this.platformId);
         const cachedEvents = this.transferState.get(UPCOMING_EVENTS_KEY, null);
 
-        if (cachedEvents && !isPlatformServer(this.platformId)) {
+        if (cachedEvents && !isPlatformServerLocal) {
             this.upcomingEventsSubject.next(cachedEvents);
             return;
         }
 
-        if (isPlatformServer(this.platformId)) {
+        if (isPlatformServerLocal) {
             this.http.get(UPCOMING_FILE_URL, { responseType: 'arraybuffer' }).subscribe({
                 next: (data) => {
                     const events: UpcomingEvent[] = this.parseExcelIntoUpcomingEvents(data);
