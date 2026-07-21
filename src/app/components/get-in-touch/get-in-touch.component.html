@@ -1,64 +1,79 @@
-<div class="max-w-lg mx-auto p-6 bg-white rounded-2xl shadow">
-  <h2 class="text-2xl font-bold mb-4">Get in Touch</h2>
+<app-content>
+    <h1 class="text-2xl font-bold mb-4 md:pt-4">Send Us A Message</h1>
 
-  <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
-    <div>
-      <label class="block text-sm font-medium mb-1">Name</label>
-      <input
-        type="text"
-        formControlName="name"
-        class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <p *ngIf="submitted && form.controls['name'].invalid" class="text-red-500 text-sm">
-        Name is required.
-      </p>
-    </div>
+    <form [formGroup]="form" (ngSubmit)="submit()" class="text-left max-w-xl mx-auto space-y-4">
+        <div>
+            <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">Name</label>
+            <input id="name" type="text" formControlName="name" autocomplete="name"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-base focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-amber-600" />
+            <p *ngIf="showError('name')" class="text-red-600 text-sm mt-1">Name is required.</p>
+        </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Email</label>
-      <input
-        type="email"
-        formControlName="email"
-        class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <p *ngIf="submitted && form.controls['email'].invalid" class="text-red-500 text-sm">
-        Valid email is required.
-      </p>
-    </div>
+        <div>
+            <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email</label>
+            <input id="email" type="email" formControlName="email" autocomplete="email"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-base focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-amber-600" />
+            <p *ngIf="showError('email')" class="text-red-600 text-sm mt-1">A valid email is required.</p>
+        </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Message</label>
-      <textarea
-        rows="4"
-        formControlName="message"
-        class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      ></textarea>
-      <p *ngIf="submitted && form.controls['message'].invalid" class="text-red-500 text-sm">
-        Message is required.
-      </p>
-    </div>
+        <div>
+            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">
+                Phone <span class="font-normal text-gray-500">(optional)</span>
+            </label>
+            <input id="phone" type="tel" formControlName="phone" autocomplete="tel"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-base focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-amber-600" />
+        </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Captcha</label>
-      <input
-        type="text"
-        formControlName="captcha"
-        placeholder="Type 1234"
-        class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <p *ngIf="submitted && form.controls['captcha'].invalid" class="text-red-500 text-sm">
-        Captcha is required.
-      </p>
-    </div>
+        <div>
+            <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Message</label>
+            <textarea id="message" rows="5" formControlName="message"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-base focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-amber-600"></textarea>
+            <p *ngIf="showError('message')" class="text-red-600 text-sm mt-1">Message is required.</p>
+        </div>
 
-    <p *ngIf="successMessage" class="text-green-600 font-medium">{{ successMessage }}</p>
-    <p *ngIf="errorMessage" class="text-red-600 font-medium">{{ errorMessage }}</p>
+        <!-- honeypot: people never see this, bots fill it in -->
+        <div class="hidden" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+        </div>
 
-    <button
-      type="submit"
-      class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
-    >
-      Send Message
-    </button>
-  </form>
-</div>
+        <div>
+            <label for="captcha" class="block text-sm font-semibold text-gray-700 mb-1">
+                Prove you're not a robot
+            </label>
+
+            <div class="flex items-center gap-3">
+                <div
+                    class="flex items-center gap-2 border border-gray-300 bg-gray-200 rounded-lg px-3 py-2 font-semibold text-gray-800 select-none whitespace-nowrap">
+                    <span>{{ captchaQuestion }}</span>
+                    <button type="button" (click)="newCaptcha()" title="New question" aria-label="New question"
+                        class="text-gray-600 hover:text-gray-900 transition-colors duration-200 hover:cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M4 4v5h5M20 20v-5h-5M20 9A8 8 0 006.3 5.7L4 8m16 8a8 8 0 01-13.7 3.3L4 16" />
+                        </svg>
+                    </button>
+                </div>
+
+                <input id="captcha" type="text" inputmode="numeric" formControlName="captcha" autocomplete="off"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white text-base focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-amber-600" />
+            </div>
+
+            <p *ngIf="showError('captcha')" class="text-red-600 text-sm mt-1">
+                {{ form.controls['captcha'].hasError('required')
+                    ? 'Please answer the question above.'
+                    : 'That answer is not quite right - give it another try.' }}
+            </p>
+        </div>
+
+        <p *ngIf="successMessage" class="text-green-700 font-semibold">{{ successMessage }}</p>
+        <p *ngIf="errorMessage" class="text-red-600 font-semibold">{{ errorMessage }}</p>
+
+        <div class="flex justify-center pt-2">
+            <button type="submit" [disabled]="sending"
+                class="bg-amber-600 hover:bg-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg hover:cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-amber-600">
+                {{ sending ? 'Sending...' : 'Send Message' }}
+            </button>
+        </div>
+    </form>
+</app-content>

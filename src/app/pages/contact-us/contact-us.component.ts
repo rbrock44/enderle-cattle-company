@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ContentComponent } from '../../components/content/content.component';
 import { ADDRESS_1, ADDRESS_2, EMAIL, GET_IN_TOUCH_PARAM, MAIL_TO, PHONE_NUMBER } from '../../constants/constants';
 import { ActivatedRoute } from '@angular/router';
+import { GetInTouchComponent } from '../../components/get-in-touch/get-in-touch.component';
 
 @Component({
   selector: 'app-contact-us',
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   imports: [
     CommonModule,
     ContentComponent,
-    // GetInTouchComponent
+    GetInTouchComponent
   ],
   providers: [],
   templateUrl: './contact-us.component.html',
