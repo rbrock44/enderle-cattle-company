@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ContentComponent } from '../../components/content/content.component';
 import { Highlight } from '../../objects/highlight';
 import { OUR_STORY_HIGHLIGHTS } from '../../constants/constants';
@@ -13,6 +13,7 @@ import { OUR_STORY_HIGHLIGHTS } from '../../constants/constants';
   ],
   providers: [],
   templateUrl: './our-story.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './our-story.component.scss'
 })
 export class OurStoryComponent {

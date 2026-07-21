@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { BannerComponent } from '../banner/banner.component';
 
 @Component({
@@ -10,6 +10,7 @@ import { BannerComponent } from '../banner/banner.component';
   providers: [
   ],
   templateUrl: './content.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './content.component.scss'
 })
 export class ContentComponent {

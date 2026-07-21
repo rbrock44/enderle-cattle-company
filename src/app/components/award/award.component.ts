@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Award } from '../../objects/award';
 
 @Component({
@@ -6,6 +6,7 @@ import { Award } from '../../objects/award';
   standalone: true,
   imports: [],
   templateUrl: './award.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './award.component.scss'
 })
 export class AwardComponent {

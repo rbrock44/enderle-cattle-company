@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
   providers: [
   ],
   templateUrl: './banner.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './banner.component.scss'
 })
 export class BannerComponent {

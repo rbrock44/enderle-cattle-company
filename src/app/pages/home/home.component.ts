@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ContentComponent } from '../../components/content/content.component';
 import { EventComponent } from '../../components/event/event.component';
 import { DEBUG } from '../../constants/constants';
@@ -14,6 +14,7 @@ import { SettingService } from '../../services/settings.service';
   ],
   providers: [],
   templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {

@@ -14,7 +14,7 @@ import { DEBUG } from '../../constants/constants';
   ],
   templateUrl: './awards.component.html',
   styleUrl: './awards.component.scss',
-  changeDetection: ChangeDetectionStrategy.Default
+  changeDetection: ChangeDetectionStrategy.Eager
 })
 export class AwardsComponent {
   awards: Award[] = [];

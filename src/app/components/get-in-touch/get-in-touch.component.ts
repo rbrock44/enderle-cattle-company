@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { SettingService } from '../../services/settings.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   providers: [
   ],
   templateUrl: './get-in-touch.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './get-in-touch.component.scss'
 })
 export class GetInTouchComponent {

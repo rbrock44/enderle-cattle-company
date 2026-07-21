@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { UpcomingEvent } from '../../objects/upcoming-event';
 
 @Component({
@@ -6,6 +6,7 @@ import { UpcomingEvent } from '../../objects/upcoming-event';
   standalone: true,
   imports: [],
   templateUrl: './event.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './event.component.scss'
 })
 export class EventComponent {

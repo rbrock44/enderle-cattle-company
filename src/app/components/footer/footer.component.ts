@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ADDRESS_1, ADDRESS_2, DEBUG, PAGE_NAMES, PHONE_NUMBER, URL_FACEOOK, URL_LINKED_IN, URL_TWITTER } from "../../constants/constants";
 import { SettingService } from '../../services/settings.service';
 
@@ -11,6 +11,7 @@ import { SettingService } from '../../services/settings.service';
   providers: [
   ],
   templateUrl: './footer.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
