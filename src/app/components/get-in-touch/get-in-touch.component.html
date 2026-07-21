@@ -8,57 +8,69 @@
         type="text"
         formControlName="name"
         class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <p *ngIf="submitted && form.controls['name'].invalid" class="text-red-500 text-sm">
-        Name is required.
-      </p>
-    </div>
+        />
+        @if (submitted && form.controls['name'].invalid) {
+          <p class="text-red-500 text-sm">
+            Name is required.
+          </p>
+        }
+      </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Email</label>
-      <input
-        type="email"
-        formControlName="email"
-        class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <p *ngIf="submitted && form.controls['email'].invalid" class="text-red-500 text-sm">
-        Valid email is required.
-      </p>
-    </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          @if (submitted && form.controls['email'].invalid) {
+            <p class="text-red-500 text-sm">
+              Valid email is required.
+            </p>
+          }
+        </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Message</label>
-      <textarea
-        rows="4"
-        formControlName="message"
-        class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      ></textarea>
-      <p *ngIf="submitted && form.controls['message'].invalid" class="text-red-500 text-sm">
-        Message is required.
-      </p>
-    </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Message</label>
+          <textarea
+            rows="4"
+            formControlName="message"
+            class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          ></textarea>
+          @if (submitted && form.controls['message'].invalid) {
+            <p class="text-red-500 text-sm">
+              Message is required.
+            </p>
+          }
+        </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">Captcha</label>
-      <input
-        type="text"
-        formControlName="captcha"
-        placeholder="Type 1234"
-        class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <p *ngIf="submitted && form.controls['captcha'].invalid" class="text-red-500 text-sm">
-        Captcha is required.
-      </p>
-    </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Captcha</label>
+          <input
+            type="text"
+            formControlName="captcha"
+            placeholder="Type 1234"
+            class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            @if (submitted && form.controls['captcha'].invalid) {
+              <p class="text-red-500 text-sm">
+                Captcha is required.
+              </p>
+            }
+          </div>
 
-    <p *ngIf="successMessage" class="text-green-600 font-medium">{{ successMessage }}</p>
-    <p *ngIf="errorMessage" class="text-red-600 font-medium">{{ errorMessage }}</p>
+          @if (successMessage) {
+            <p class="text-green-600 font-medium">{{ successMessage }}</p>
+          }
+          @if (errorMessage) {
+            <p class="text-red-600 font-medium">{{ errorMessage }}</p>
+          }
 
-    <button
-      type="submit"
-      class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
-    >
-      Send Message
-    </button>
-  </form>
-</div>
+          <button
+            type="submit"
+            class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition"
+            >
+            Send Message
+          </button>
+        </form>
+      </div>

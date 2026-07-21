@@ -1,4 +1,4 @@
-import { CommonModule, Location } from '@angular/common';
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { SettingService } from '../../services/settings.service';
 import { DEBUG, GET_IN_TOUCH_URL, PAGE_NAMES, URL_FACEOOK, URL_LINKED_IN, URL_TWITTER } from '../../constants/constants';
@@ -6,9 +6,7 @@ import { DEBUG, GET_IN_TOUCH_URL, PAGE_NAMES, URL_FACEOOK, URL_LINKED_IN, URL_TW
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

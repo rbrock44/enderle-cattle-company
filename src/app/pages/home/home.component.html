@@ -1,11 +1,14 @@
 <div class="flex flex-col justify-center items-center text-lg space-y-2">
-   <h1 class="text-2xl font-bold text-white mt-4">Home</h1>
+  <h1 class="text-2xl font-bold text-white mt-4">Home</h1>
 
-   <app-content *ngIf="this.upcomingEvents.length > 0">
-        <h1 class="text-2xl font-bold mb-4 pt-1">Upcoming Events</h1>
-        <div *ngFor="let event of upcomingEvents" class="md:mb-6 md:p-4 sm:p-2 border-b border-gray-300">
-            <app-event [event]="event"></app-event>
+  @if (this.upcomingEvents.length > 0) {
+    <app-content>
+      <h1 class="text-2xl font-bold mb-4 pt-1">Upcoming Events</h1>
+      @for (event of upcomingEvents; track event) {
+        <div class="md:mb-6 md:p-4 sm:p-2 border-b border-gray-300">
+          <app-event [event]="event"></app-event>
         </div>
-    
+      }
     </app-content>
+  }
 </div>

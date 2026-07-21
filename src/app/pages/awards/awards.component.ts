@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContentComponent } from "../../components/content/content.component";
 import { Award } from '../../objects/award';
@@ -10,10 +9,9 @@ import { DEBUG } from '../../constants/constants';
   selector: 'app-awards',
   standalone: true,
   imports: [
-    CommonModule,
     ContentComponent,
     AwardComponent
-],
+  ],
   templateUrl: './awards.component.html',
   styleUrl: './awards.component.scss',
   changeDetection: ChangeDetectionStrategy.Default

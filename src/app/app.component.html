@@ -1,13 +1,21 @@
 <div class="min-h-screen flex flex-col">
   <app-header/>
-  
+
   <main class="flex-grow bg-gray-600">
-    <app-home *ngIf="showPage[0] === true"/>
-    <app-our-story *ngIf="showPage[1] === true"/>
-    <app-awards *ngIf="showPage[2] === true"/>
-    <app-contact-us *ngIf="showPage[3] === true"/>
+    @if (showPage[0] === true) {
+      <app-home/>
+    }
+    @if (showPage[1] === true) {
+      <app-our-story/>
+    }
+    @if (showPage[2] === true) {
+      <app-awards/>
+    }
+    @if (showPage[3] === true) {
+      <app-contact-us/>
+    }
   </main>
-  
+
   <app-footer/>
 </div>
 

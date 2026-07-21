@@ -1,12 +1,14 @@
 <div>
-    <div class="font-semibold text-lg">
-        {{ event.year }} - {{ event.name }}
+  <div class="font-semibold text-lg">
+    {{ event.year }} - {{ event.name }}
+  </div>
+  <div class="text-gray-700">
+    {{ this.trimYear(event.startDate) }} - {{ this.trimYear(event.endDate) }} | {{ event.location }}
+  </div>
+  @if (event.description) {
+    <div class="text-gray-500">
+      {{ event.description }}
     </div>
-    <div class="text-gray-700">
-       {{ this.trimYear(event.startDate) }} - {{ this.trimYear(event.endDate) }} | {{ event.location }}
-    </div>
-    <div class="text-gray-500" *ngIf="event.description">
-        {{ event.description }}  
-    </div>
+  }
 
 </div>

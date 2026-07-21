@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ContentComponent } from '../../components/content/content.component';
 import { EventComponent } from '../../components/event/event.component';
@@ -10,7 +9,6 @@ import { SettingService } from '../../services/settings.service';
   selector: 'app-home',
   standalone: true,
   imports: [
-    CommonModule,
     ContentComponent,
     EventComponent
   ],

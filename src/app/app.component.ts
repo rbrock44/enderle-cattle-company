@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { FooterComponent } from "./components/footer/footer.component";
@@ -15,7 +14,6 @@ import { SettingService } from './services/settings.service';
   standalone: true,
   imports: [
     AwardsComponent,
-    CommonModule,
     ContactUsComponent,
     FooterComponent,
     HeaderComponent,

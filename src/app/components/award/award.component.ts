@@ -1,13 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Award } from '../../objects/award';
 
 @Component({
   selector: 'app-award',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [],
   templateUrl: './award.component.html',
   styleUrl: './award.component.scss'
 })

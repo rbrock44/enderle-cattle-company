@@ -1,13 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { UpcomingEvent } from '../../objects/upcoming-event';
 
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [],
   templateUrl: './event.component.html',
   styleUrl: './event.component.scss'
 })
